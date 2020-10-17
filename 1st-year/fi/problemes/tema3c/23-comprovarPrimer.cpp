@@ -17,6 +17,7 @@ int main()
     {
         cout << "PRIMER";
     }
+    cout << endl;
 
     return 0;
 }
