@@ -1,0 +1,1 @@
+int Aleatori(int, int);
