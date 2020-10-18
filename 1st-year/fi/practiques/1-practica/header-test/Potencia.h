@@ -1,0 +1,1 @@
+int Potencia(int, int);
