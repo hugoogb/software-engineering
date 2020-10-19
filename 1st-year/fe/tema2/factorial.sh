@@ -7,7 +7,7 @@ i=1
 res=1
 while [ $i -le $num ]
 do
-  res=$((res*i))
+  let res=res*i
   let i=i+1
 done
 
