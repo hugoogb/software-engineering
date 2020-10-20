@@ -1,4 +1,5 @@
 #include "Aleatori.h"
+#include <math.h>
 
 int Aleatori(int NumMin, int NumMax)
 {

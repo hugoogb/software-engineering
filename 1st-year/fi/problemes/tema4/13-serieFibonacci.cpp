@@ -3,13 +3,19 @@
 using namespace std;
 
 int fibonacci(int n){
- int n1, n2;
-  
-  
+  int numAnterior = 0, num = 1, numAux;
+
+  for (int i = 0; i < n; i++ ){
+    numAux = num;
+    num += numAnterior;
+    numAnterior = numAux;
+  }
+
+  return num;
 }
 
 int main(){
-  int n;
+  int n, resFibonacci;
 
   cout << "Quin terme de la serie Fibonacci vols calcular? "; cin >> n;
 
@@ -19,7 +25,9 @@ int main(){
     cout << "Quin terme de la serie Fibonacci vols calcular? "; cin >> n;
   }
 
+  resFibonacci = fibonacci(n);
 
+  cout << "El terme " << n << " de la serie de Fibonacci es " << resFibonacci << endl;
 
   return 0;
 }
