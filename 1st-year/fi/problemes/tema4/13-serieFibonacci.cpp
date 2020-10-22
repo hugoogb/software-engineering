@@ -3,15 +3,21 @@
 using namespace std;
 
 int fibonacci(int n){
-  int numAnterior = 0, num = 1, numAux;
+  int numAnterior = 1, numActual = 2, numAux;
 
-  for (int i = 0; i < n; i++ ){
-    numAux = num;
-    num += numAnterior;
-    numAnterior = numAux;
-  }
+  if (n > 3) {
+    for (int i = 3; i < n; i++ ){
+      numAux = numActual;
+      numActual += numAnterior;
+      numAnterior = numAux;
+    }
+  } else if (n == 0) {
+    numActual = 0;
+  } else if (n == 1 || n == 2) {
+    numActual = 1;
+  } 
 
-  return num;
+  return numActual;
 }
 
 int main(){
