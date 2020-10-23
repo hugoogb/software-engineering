@@ -9,14 +9,14 @@ int divisio(int dividend, int divisor){
   if (divisor > 0) {
     quocient = -1;
     while (sumaQuocient <= dividend) {
-      sumaQuocient = sumaQuocient + divisor;
+      sumaQuocient += divisor;
       quocient += 1;
     } 
   } else {
     quocient = 1;
     divisor = abs(divisor);
     while (sumaQuocient <= dividend) {
-      sumaQuocient = sumaQuocient + divisor;
+      sumaQuocient += divisor;
       quocient -= 1;
     }
   }
