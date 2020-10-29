@@ -4,29 +4,25 @@ using namespace std;
 
 int maximMinim(int num, int &min, int &max){
   int resNum = 0, count = 0;
+
   if (count == 0 && num == 0) {
     resNum = 1;
   } else {
+
+    min = num;
+    max = num;
+
     do {
       cout << "Introdueix un nombre enter: ";
       cin >> num;
-      
-	if (count == 0)
-        {
-	  min = num;
-	  max = num;
-        }
-        else
-        {
-            if (num < min && num != 0)
-            {
-                min = num;
-            }
-            else if (num > max && num != 0){
+        
+      if (num < min && num != 0){
+              min = num;
+      }
+      else if (num > max && num != 0){
 		  max = num;
-            }
-        }
-        count ++;
+      }
+      count ++;
     }while (count < 10 && num != 0);
   }
 
