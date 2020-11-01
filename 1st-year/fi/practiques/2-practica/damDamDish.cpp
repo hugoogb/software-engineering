@@ -45,7 +45,7 @@ int LlegirSenar(){
 
   senar = Senar(Num);
   
-  while (senar == false) {
+  while (!senar) {
     cout << "ERROR: El nombre introduit es parell" << endl;
 
     cout << "Introdueix un nombre senar: "; cin >> Num;
@@ -69,7 +69,7 @@ int LlegirNombre(int min, int max){
   cout << "Entra valor entre " << min << " i " << max << ": "; cin >> Num;
 
   while (Num < min || Num > max) {
-    cout << "Error: valor fora de l'interval";
+    cout << "Error: valor fora de l'interval" << endl;
 
     cout << "Entra valor entre " << min << " i " << max << ": "; cin >> Num;
   }
@@ -80,12 +80,16 @@ int LlegirNombre(int min, int max){
 void MissatgeAI(int opcioAI){
   cout << "L'ordinador ha escollit aleatoriament ";
 
-  if (opcioAI == 1) {
-    cout << "ESCUT";
-  } else if (opcioAI == 2) {
-    cout << "CARREGA";
-  } else if (opcioAI == 3) {
-    cout << "TRET";
+  switch (opcioAI) {
+    case ESCUT: 
+      cout << "ESCUT";
+      break;
+    case CARREGA:
+      cout << "CARREGA";
+      break;
+    case TRET:
+      cout << "TRET";
+      break;
   }
 
   cout << endl;
@@ -118,13 +122,15 @@ int JocDamDamDish(int numPlayer1, int numPlayer2){
 }
 
 int main(){
-  int numPartidesJugades = 0, numPartides, resPartida, opcioPlayer1, opcioPlayer2, winsPlayer1 = 0, winsPlayer2 = 0, balesPlayer1 = 1, balesPlayer2 = 1;
+  int numPartides, numPartidesEnd, resPartida, opcioPlayer1, opcioPlayer2, winsPlayer1 = 0, winsPlayer2 = 0, balesPlayer1 = 1, balesPlayer2 = 1;
 
   PresentacioJoc();
 
   numPartides = LlegirSenar();
 
-  while (numPartidesJugades < numPartides) {
+  numPartidesEnd = (numPartides / 2) + 1;
+
+  while (winsPlayer1 < numPartidesEnd && winsPlayer2 < numPartidesEnd){
     if (balesPlayer2 != 0) {
       opcioPlayer2 = Aleatori(ESCUT, TRET);
     } else {
@@ -172,7 +178,6 @@ int main(){
 	cout << "Empat. Seguim la partida" << endl;;
 	break;
       case WINB:
-	numPartidesJugades++;
 	winsPlayer2++;
 	
 	cout << "Et guanya un ordinador!!!" << endl;
@@ -182,7 +187,6 @@ int main(){
 	balesPlayer2 = 1;
 	break;
       case WINA:
-	numPartidesJugades++;
 	winsPlayer1++;
 
 	cout << "Guanyes Tu!!!" << endl;
