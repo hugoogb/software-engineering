@@ -17,3 +17,7 @@ int MinimVectorNoZero(int arr[], int sizeArray);
 int OrdenatDecreixent(int arr[], int sizeArray);
 
 int BuscarPosicio(int arr[], int numBuscarPos, int sizeArray);
+
+int InversArray(int arr1[], int arr2[], int sizeArray);
+
+void OrdenarVector(int arr[], int sizeArray);
