@@ -4,6 +4,8 @@ esportistes=`wc -l < esportistes`
 
 edatMenor=`head -1 esportistes | tail -1 | cut -d: -f4`
 
+cat /dev/null > menor
+
 i=1
 while [ $i -le $esportistes ]
 do
