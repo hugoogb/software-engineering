@@ -1,5 +1,5 @@
 #include <iostream>
-#include "vectors.h"
+#include "funcionsArray.h"
 
 using namespace std;
 
@@ -11,10 +11,10 @@ void InicialitzarVector(int arr[], int valorArray, int sizeArray){
 }
 
 // Llegir valors introduits i guardarlos al vector
-void LlegirVector(float arr[], int sizeArray){
+void LlegirVector(int arr[], int sizeArray){
   for (int i = 0; i < sizeArray; i++) {
     cin >> arr[i];
-  }
+    }
 }
 
 // Escriure per pantalla un vector
@@ -103,4 +103,49 @@ int MinimVectorNoZero(int arr[], int sizeArray){
 
 
   return posValorMin;
+}
+
+// Comprovar si un vector esta ordenat de forma decreixent
+int OrdenatDecreixent(int arr[], int sizeArray){
+  int i = 0;
+  bool desordenat = false;
+  
+  while (i < (sizeArray - 1) && !desordenat) {
+     if (arr[i] > arr[i + 1]) {
+       i++;
+     } else {
+       desordenat = true;
+     }
+  }
+
+  if (desordenat) {
+    return 0;
+  } else {
+    return 1;
+  }
+
+}
+
+// Buscar en quina posició de l’array li correspondria anar al valor entrat
+int BuscarPosicio(int arr[], int numBuscarPos, int sizeArray){
+  int i = 0;
+  bool find = false;
+
+  while (i < (sizeArray - 1) && !find) {
+    if (i == 0 && numBuscarPos > arr[i]) {
+      find = true;
+    } else if (numBuscarPos < arr[i] && numBuscarPos > arr[i + 1]) {
+      find = true;
+      i += 1;
+    } else {
+      i++;
+    }
+  }
+
+  if (find) {
+    return i;
+  } else {
+    return -1;
+  }
+
 }

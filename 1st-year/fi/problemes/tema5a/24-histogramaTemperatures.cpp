@@ -6,4 +6,10 @@ using namespace std;
 
 #define SIZE 14
 
+int main(){
+  float temp[SIZE];
 
+  LlegirVector(temp, SIZE);
+
+  return 0;
+}
