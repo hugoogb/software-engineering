@@ -32,16 +32,16 @@ void EscriureVector(int arr[], int sizeArray)
 }
 
 // Sumar dos vectors
-void SumarVectors(int arr1[], int arr2[], int suma[], int sizeArray)
+void SumarVectors(int arr1[], int arr2[], int sumaArr[], int sizeArray)
 {
   for (int i = 0; i < sizeArray; i++)
   {
-    suma[i] = arr1[i] + arr2[i];
+    sumaArr[i] = arr1[i] + arr2[i];
   }
 }
 
 // Calcular la mitjana dels elements d'un vector
-float MitjanaVector(float arr[], int sizeArray)
+float MitjanaVector(int arr[], int sizeArray)
 {
   float mitjana = 0, suma = 0;
 
@@ -56,7 +56,7 @@ float MitjanaVector(float arr[], int sizeArray)
 }
 
 // Trobar el maxim d'un vector
-int MaximVector(float arr[], int sizeArray)
+int MaximVector(int arr[], int sizeArray)
 {
   int valorMax, posValorMax;
 
@@ -76,7 +76,7 @@ int MaximVector(float arr[], int sizeArray)
 }
 
 // Trobar el minim d'un vector
-int MinimVector(float arr[], int sizeArray)
+int MinimVector(int arr[], int sizeArray)
 {
   int valorMin, posValorMin;
 

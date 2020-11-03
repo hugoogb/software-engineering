@@ -4,13 +4,13 @@ void LlegirVector(int arr[], int sizeArray);
 
 void EscriureVector(int arr[], int sizeArray);
 
-void SumarVectors(int arr1[], int arr2[], int suma[], int sizeArray);
+void SumarVectors(int arr1[], int arr2[], int sumaArr[], int sizeArray);
 
-float MitjanaVector(float arr[], int sizeArray);
+float MitjanaVector(int arr[], int sizeArray);
 
-int MaximVector(float arr[], int sizeArray);
+int MaximVector(int arr[], int sizeArray);
 
-int MinimVector(float arr[], int sizeArray);
+int MinimVector(int arr[], int sizeArray);
 
 int MinimVectorNoZero(int arr[], int sizeArray);
 
