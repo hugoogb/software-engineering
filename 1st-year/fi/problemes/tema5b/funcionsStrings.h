@@ -1,0 +1,1 @@
+int LongCadena(char c[]);
