@@ -13,29 +13,29 @@ int LongCadena(char c[])
     return length;
 }
 
-void ConcatenarCadena(char cad1[], char cad2[], char cad3[])
+void ConcatenarCadena(char c1[], char c2[], char c3[])
 {
     int i = 0, j = 0;
 
-    while (cad1[i] != '\0')
+    while (c1[i] != '\0')
     {
-        cad3[i] = cad1[i];
+        c3[i] = c1[i];
 
         i++;
     }
 
-    while (cad2[j] != '\0')
+    while (c2[j] != '\0')
     {
-        cad3[i] = cad2[j];
+        c3[i] = c2[j];
 
         i++;
         j++;
     }
 
-    cad3[i] = '\0';
+    c3[i] = '\0';
 }
 
-char TrobarCaracter(char cad[], char c)
+int TrobarCaracter(char cad[], char c)
 {
     int i = 0;
     bool find = false;
@@ -59,5 +59,77 @@ char TrobarCaracter(char cad[], char c)
     else
     {
         return 0;
+    }
+}
+
+void Majuscules(char c[])
+{
+    int i = 0;
+
+    while (c[i] != '\0')
+    {
+        if (c[i] >= 97 && c[i] <= 122)
+        {
+            c[i] -= 32;
+        }
+
+        i++;
+    }
+}
+
+int Palindrom(char c[])
+{
+    int i = 0, j, lenght, mitad, res;
+    bool find = false;
+
+    lenght = strlen(c);
+    j = lenght - 1;
+    mitad = 2 / j;
+
+    while (i < lenght && !find)
+    {
+        if (c[i] != c[j])
+        {
+            find = true;
+        }
+        else
+        {
+            i++;
+            j--;
+        }
+    }
+
+    if (find)
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
+}
+
+char PrimerDiferent(char c1[], char c2[])
+{
+    int i = 0;
+    bool find = false;
+
+    while (c1[i] != '\0' && !false)
+    {
+        if (c1[i] != c2[i])
+        {
+            find = true;
+
+            return c1[i];
+        }
+        else
+        {
+            i++;
+        }
+    }
+
+    if (!find)
+    {
+        return '\0';
     }
 }
