@@ -79,7 +79,7 @@ int SimetricaMatriu(float m[][N_COL], int n_fil, int n_col)
     if (find)
     {
         return 0;
-    } else 
+    } else
     {
         return 1;
     }
