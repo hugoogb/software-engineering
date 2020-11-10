@@ -1,4 +1,8 @@
+#include <iostream>
+#include <math.h>
+#include <time.h>
 #include "FuncionsMasterMind.h"
+
 
 using namespace std;
 
@@ -15,6 +19,7 @@ int Aleatori(int NumMin, int NumMax)
 
 void Menu()
 {
+    cout << endl;
     cout << "MASTER MIND" << endl
          << endl;
     cout << "Escull una opcio: " << endl
@@ -27,7 +32,7 @@ void Menu()
 void Ajuda()
 {
     cout << "L'objectiu del joc es trobar el codi ocult" << endl;
-    cout << "El codi es de longitud " << LongCodi << "nombres del 0 al 9" << endl;
+    cout << "El codi es de longitud " << LongCodi << " nombres del 0 al 9" << endl;
     cout << "Despres de cada intent et dona la seguent informacio: " << endl;
     cout << "\tNombre de nombres encertats (en la posicio correcte)" << endl;
     cout << "\tNombre de nombres aproximats (correctes pero mal col.locats)" << endl;
@@ -38,7 +43,7 @@ void GenerarCodiOcult(int CodiMaster[], int Dim)
 {
     for (int i = 0; i < Dim; i++)
     {
-        CodiMaster[i] = Aleatori(0, Dim);
+        CodiMaster[i] = Aleatori(0, 9);
     }
 }
 
@@ -60,18 +65,15 @@ int LlegirNombre(int min, int max)
     return Num;
 }
 
-void intToArray(int Nombre, int Codi[], int Dim)
+void IntToArray(int Nombre, int Codi[], int Dim)
 {
-    int divisor = 1, numAux = Nombre;
+    int numAux = Nombre;
+    float divisor = 1;
 
     while (numAux >= 10)
     {
         numAux /= 10;
-
-        if (numAux >= 10)
-        {
-            divisor *= 10;
-        }
+        divisor *= 10;
     }
 
     for (int i = 0; i < Dim; i++)
@@ -115,6 +117,7 @@ int NombreEncerts(int CodiMaster[], int CodiBreaker[], int Dim)
             counterCorrecte++;
         }
     }
+    return counterCorrecte;
 }
 
 int Minim(int Valor1, int Valor2)
@@ -135,13 +138,72 @@ int Minim(int Valor1, int Valor2)
 
 int NombreAproximacions(int FrequenciaCodiMaster[], int FrequenciaCodiBreaker[], int Encerts)
 {
-    int w, res;
+    int w, sumRes = 0, res;
 
     for (int i = 0; i < 10; i++)
     {
-        res = (Minim(FrequenciaCodiMaster[i], FrequenciaCodiBreaker[i]) - Encerts);
-        w += res;
+        res = Minim(FrequenciaCodiMaster[i], FrequenciaCodiBreaker[i]);
+        sumRes += res;
     }
 
+    w = sumRes - Encerts;
+
     return w;
+}
+
+void ImprimirComparacions(int encerts, int aproximacions){
+    cout << "Aquest codi te " << encerts << " Encerts i " << aproximacions << " Aproximacions" << endl;   
+}
+
+int JocMasterMind(){
+    int CodiMaster[LongCodi], CodiBreaker[LongCodi], IntCodiBreaker, FrequenciaCodiMaster[10], FrequenciaCodiBreaker[10], Encerts = 0, Aproximacions, Intents = 0;
+
+    GenerarCodiOcult(CodiMaster, LongCodi);
+
+    InicialitzarArray(FrequenciaCodiMaster, 10, 0);
+
+    FrequenciaDigit(CodiMaster, LongCodi, FrequenciaCodiMaster);
+
+    while (Encerts != 4 && Intents < MaxIntents)
+    {
+        IntCodiBreaker = LlegirNombre(0, pow(10, LongCodi) - 1); 
+
+        IntToArray(IntCodiBreaker, CodiBreaker, LongCodi);
+
+        InicialitzarArray(FrequenciaCodiBreaker, 10, 0);
+
+        FrequenciaDigit(CodiBreaker, LongCodi, FrequenciaCodiBreaker);
+
+        Encerts = NombreEncerts(CodiMaster, CodiBreaker, LongCodi);
+
+        Aproximacions = NombreAproximacions(FrequenciaCodiMaster, FrequenciaCodiBreaker, Encerts);
+
+        ImprimirComparacions(Encerts, Aproximacions);
+        
+        Intents++;
+    }
+
+    if (Encerts == 4)
+    {
+        return Intents;
+    } else 
+    {
+        Intents = 0;
+        return Intents;
+    }
+
+}
+
+void ImprimirResultatsJoc(int Intents)
+{
+    cout << endl;
+    if (Intents == 0)
+    {
+        cout << "No has aconseguit descobrir el codi";
+    } else
+    {
+        cout << "Has aconseguit descobrir el codi en " << Intents << " intents";
+    }    
+    cout << endl << endl;
+
 }

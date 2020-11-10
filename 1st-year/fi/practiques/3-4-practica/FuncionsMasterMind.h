@@ -9,8 +9,8 @@
 #define Digits 10
 
 void Ajuda();
-int Aleatori(int, int );
-void GenerarCodiOcult(int *,int );
+int Aleatori(int , int );
+void GenerarCodiOcult(int , int );
 int LlegirNombre(int , int );
 void IntToArray(int , int *, int );
 void InicialitzarArray(int *, int , int );
