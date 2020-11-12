@@ -3,7 +3,6 @@
 #include <time.h>
 #include "FuncionsMasterMind.h"
 
-
 using namespace std;
 
 int Aleatori(int NumMin, int NumMax)
@@ -94,15 +93,12 @@ void InicialitzarArray(int Array[], int Dim, int Valor)
 
 void FrequenciaDigit(int Codi[], int Dim, int Frequencia[])
 {
+    int iAux = 0;
+
     for (int i = 0; i < Dim; i++)
     {
-        for (int j = 0; j < 10; j++)
-        {
-            if (Codi[i] == j)
-            {
-                Frequencia[j]++;
-            }
-        }
+        iAux = Codi[i];
+        Frequencia[iAux]++;
     }
 }
 
@@ -152,7 +148,7 @@ int NombreAproximacions(int FrequenciaCodiMaster[], int FrequenciaCodiBreaker[],
 }
 
 void ImprimirComparacions(int encerts, int aproximacions){
-    cout << "Aquest codi te " << encerts << " Encerts i " << aproximacions << " Aproximacions" << endl;   
+    cout << "Aquest codi te " << encerts << " Encerts i " << aproximacions << " Aproximacions" << endl;
 }
 
 int JocMasterMind(){
@@ -166,7 +162,7 @@ int JocMasterMind(){
 
     while (Encerts != 4 && Intents < MaxIntents)
     {
-        IntCodiBreaker = LlegirNombre(0, pow(10, LongCodi) - 1); 
+        IntCodiBreaker = LlegirNombre(0, pow(10, LongCodi) - 1);
 
         IntToArray(IntCodiBreaker, CodiBreaker, LongCodi);
 
@@ -179,14 +175,14 @@ int JocMasterMind(){
         Aproximacions = NombreAproximacions(FrequenciaCodiMaster, FrequenciaCodiBreaker, Encerts);
 
         ImprimirComparacions(Encerts, Aproximacions);
-        
+
         Intents++;
     }
 
     if (Encerts == 4)
     {
         return Intents;
-    } else 
+    } else
     {
         Intents = 0;
         return Intents;
@@ -203,7 +199,7 @@ void ImprimirResultatsJoc(int Intents)
     } else
     {
         cout << "Has aconseguit descobrir el codi en " << Intents << " intents";
-    }    
+    }
     cout << endl << endl;
 
 }
