@@ -20,7 +20,6 @@ do
 done
 
 i=1
-
 while [ $i -le $esportistes ]
 do
   edat=`head -$i esportistes.txt | tail -1 | cut -d: -f4`
