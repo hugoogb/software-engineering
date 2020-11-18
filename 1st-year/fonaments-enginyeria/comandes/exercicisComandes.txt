@@ -1,0 +1,58 @@
+EXERCICIS COMANDES
+------------------
+
+-->> 1.
+cd /dev
+ls
+
+-->> 2.
+ls | head -4
+
+-->> 3.
+ls -la | grep ^d
+(find /dev/ -type d -print)
+
+-->> 4.
+ls -la | grep ^d | wc -l
+(find /dev/ -type d -print | wc -l)
+
+-->> 5.
+ls > ~/llistat_dev
+
+-->> 6.
+cd ~
+head -34 llistat_dev | tail -1
+
+-->> 7.
+cd ~
+head -34 llistat_dev | tail -1 > llistat_dev1
+head -33 llistat_dev > llistat_dev2
+tail +35 llistat_dev > llistat_dev3
+cat llistat_dev1 > llistat_dev
+cat llistat_dev2 >> llistat_dev
+cat llistat_dev3 >> llistat_dev
+
+-->> 8.
+cp /etc/passwd ~/file1 || cd /etc -- cp passwd ~/file1
+
+-->> 9.
+sort file1 | cut -d: -f1
+
+-->> 10.
+cat file1 | grep ^a | wc -l
+
+-->> 11.
+cat file1 | cut -d: -f1 > file1_2
+cat file1 | cut -d: -f2 > file1_1
+cat file1 | cut -d: -f3- > file1_3
+paste -d: file1_1 file2_2 file1_3 > file1bis
+
+-->> 12.
+echo AAA > file1.1bis
+cat file1bis | head -24 | tail -1 | cut -d: -f2- > file1.2bis
+cat file1bis | head -23 > file1.3bis
+cat file1bis | tail +25 > file1.4bis
+paste -d: file1.1bis file1.2bis > file1.5bis
+cat file1.3bis > file1bis
+cat file1.5bis >> file1bis
+cat file1.4bis >> file1bis
