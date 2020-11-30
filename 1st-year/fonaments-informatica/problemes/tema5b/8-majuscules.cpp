@@ -1,18 +1,17 @@
+#include "strings.cpp"
+#include "strings.h"
 #include <iostream>
-#include "funcionsStrings.cpp"
-#include "funcionsStrings.h"
 
 using namespace std;
 
 #define LONG 50
 
-int main()
-{
-    char cad[LONG];
+int main() {
+  char cad[LONG];
 
-    cin >> cad;
+  cin >> cad;
 
-    Majuscules(cad);
+  Majuscules(cad);
 
-    cout << cad;
+  cout << cad;
 }
