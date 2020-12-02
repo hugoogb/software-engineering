@@ -1,6 +1,6 @@
-#include "FuncionsMasterMind.cpp"
-#include "FuncionsMasterMind.h"
 #include <iostream>
+
+#include "FuncionsMasterMind.h"
 
 using namespace std;
 
