@@ -58,9 +58,6 @@ int LlegirNombre(int min, int max) {
 }
 
 void IntToArray(int Nombre, int Codi[], int Dim) {
-  int numAux = Nombre;
-  int divisor = 1;
-
   for (int i = Dim - 1; i < Dim; i++) {
     Codi[i] = Nombre % 10;
     Nombre = Nombre / 10;

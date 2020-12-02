@@ -1,7 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include <time.h>
-#include "Aleatori.cpp"
+
 #include "Aleatori.h"
 
 using namespace std;
@@ -14,8 +14,9 @@ using namespace std;
 #define WINA 1
 #define WINB 2
 
-void PresentacioJoc(){
-  cout << "Dam dam dish, es un joc infantil on es simula un duel de pistolers. L'objectiu del joc es matar al contrincant";
+void PresentacioJoc() {
+  cout << "Dam dam dish, es un joc infantil on es simula un duel de pistolers. "
+          "L'objectiu del joc es matar al contrincant";
   cout << "\nEl joc es per parelles hi ha tres moviments basics :";
   cout << "\n- Bracos en creu sobre el pit : escut";
   cout << "\n- Mans en forma de pistola apuntant al contrincant : tret";
@@ -23,106 +24,111 @@ void PresentacioJoc(){
   cout << "\nEl joc es al millor de N partides on N es un nombre senar" << endl;
 }
 
-int Senar(int Num){
+int Senar(int Num) {
   bool senar;
-  
+
   if (Num < 0) {
     senar = false;
   } else if (Num % 2 != 0) {
-      senar = true;
-    } else {
-      senar = false;
-    }
+    senar = true;
+  } else {
+    senar = false;
+  }
 
   return senar;
 }
 
-int LlegirSenar(){
+int LlegirSenar() {
   int Num;
   bool senar;
 
-  cout << "Introdueix un nombre senar: "; cin >> Num;
+  cout << "Introdueix un nombre senar: ";
+  cin >> Num;
 
   senar = Senar(Num);
-  
+
   while (!senar) {
     cout << "ERROR: El nombre introduit es parell" << endl;
 
-    cout << "Introdueix un nombre senar: "; cin >> Num;
+    cout << "Introdueix un nombre senar: ";
+    cin >> Num;
 
     senar = Senar(Num);
   }
-  
+
   return Num;
 }
 
-void MenuDamDamDish(){
+void MenuDamDamDish() {
   cout << "Escull entre:";
   cout << "\n1. Escut: protegeix dels trets del rival";
   cout << "\n2. Carrega: afegeix una bala al carregador";
   cout << "\n3. Tret: dispara al teu rival" << endl;
 }
 
-int LlegirNombre(int min, int max){
+int LlegirNombre(int min, int max) {
   int Num;
 
-  cout << "Entra valor entre " << min << " i " << max << ": "; cin >> Num;
+  cout << "Entra valor entre " << min << " i " << max << ": ";
+  cin >> Num;
 
   while (Num < min || Num > max) {
     cout << "Error: valor fora de l'interval" << endl;
 
-    cout << "Entra valor entre " << min << " i " << max << ": "; cin >> Num;
+    cout << "Entra valor entre " << min << " i " << max << ": ";
+    cin >> Num;
   }
 
   return Num;
 }
 
-void MissatgeAI(int opcioAI){
+void MissatgeAI(int opcioAI) {
   cout << "L'ordinador ha escollit aleatoriament ";
 
   switch (opcioAI) {
-    case ESCUT: 
-      cout << "ESCUT";
-      break;
-    case CARREGA:
-      cout << "CARREGA";
-      break;
-    case TRET:
-      cout << "TRET";
-      break;
+  case ESCUT:
+    cout << "ESCUT";
+    break;
+  case CARREGA:
+    cout << "CARREGA";
+    break;
+  case TRET:
+    cout << "TRET";
+    break;
   }
 
   cout << endl;
 }
 
-int JocDamDamDish(int numPlayer1, int numPlayer2){
+int JocDamDamDish(int numPlayer1, int numPlayer2) {
   int resultat;
 
   switch (numPlayer1) {
-    case ESCUT:
+  case ESCUT:
+    resultat = EMPAT;
+    break;
+  case CARREGA:
+    if (numPlayer2 == TRET) {
+      resultat = WINB;
+    } else {
       resultat = EMPAT;
-      break;
-    case CARREGA:
-      if (numPlayer2 == TRET) {
-	resultat = WINB;
-      } else {
-	resultat = EMPAT;
-      }
-      break;
-    case TRET:
-      if (numPlayer2 == CARREGA) {
-	resultat = WINA;
-      } else {
-	resultat = EMPAT;
-      }
-      break;
+    }
+    break;
+  case TRET:
+    if (numPlayer2 == CARREGA) {
+      resultat = WINA;
+    } else {
+      resultat = EMPAT;
+    }
+    break;
   }
 
   return resultat;
 }
 
-int main(){
-  int numPartides, numPartidesEnd, resPartida, opcioPlayer1, opcioPlayer2, winsPlayer1 = 0, winsPlayer2 = 0, balesPlayer1 = 1, balesPlayer2 = 1;
+int main() {
+  int numPartides, numPartidesEnd, resPartida, opcioPlayer1, opcioPlayer2,
+      winsPlayer1 = 0, winsPlayer2 = 0, balesPlayer1 = 1, balesPlayer2 = 1;
 
   PresentacioJoc();
 
@@ -130,7 +136,7 @@ int main(){
 
   numPartidesEnd = (numPartides / 2) + 1;
 
-  while (winsPlayer1 < numPartidesEnd && winsPlayer2 < numPartidesEnd){
+  while (winsPlayer1 < numPartidesEnd && winsPlayer2 < numPartidesEnd) {
     if (balesPlayer2 != 0) {
       opcioPlayer2 = Aleatori(ESCUT, TRET);
     } else {
@@ -138,35 +144,35 @@ int main(){
     }
 
     switch (opcioPlayer2) {
-      case CARREGA:
-	balesPlayer2++;
-	break;
-      case TRET:
-	balesPlayer2--;
-	break;
+    case CARREGA:
+      balesPlayer2++;
+      break;
+    case TRET:
+      balesPlayer2--;
+      break;
     }
 
     MenuDamDamDish();
-    
+
     opcioPlayer1 = LlegirNombre(ESCUT, TRET);
 
     switch (opcioPlayer1) {
-      case CARREGA:
-	balesPlayer1++;
-	break;
-      case TRET:
-	if (balesPlayer1 == 0) {
-	  cout << "No tens bales. Escull entre 1 (Escut) o 2 (Carrega)" << endl;
-      
-	  opcioPlayer1 = LlegirNombre(ESCUT, CARREGA);
+    case CARREGA:
+      balesPlayer1++;
+      break;
+    case TRET:
+      if (balesPlayer1 == 0) {
+        cout << "No tens bales. Escull entre 1 (Escut) o 2 (Carrega)" << endl;
 
-	  if (opcioPlayer1 == CARREGA) {
-	    balesPlayer1++;
-	  }
-	} else {
-	balesPlayer1--;
-	}
-	break;
+        opcioPlayer1 = LlegirNombre(ESCUT, CARREGA);
+
+        if (opcioPlayer1 == CARREGA) {
+          balesPlayer1++;
+        }
+      } else {
+        balesPlayer1--;
+      }
+      break;
     }
 
     resPartida = JocDamDamDish(opcioPlayer1, opcioPlayer2);
@@ -174,30 +180,32 @@ int main(){
     MissatgeAI(opcioPlayer2);
 
     switch (resPartida) {
-      case EMPAT:
-	cout << "Empat. Seguim la partida" << endl;;
-	break;
-      case WINB:
-	winsPlayer2++;
-	
-	cout << "Et guanya un ordinador!!!" << endl;
-	cout << "MARCADOR - Ordinador " << winsPlayer2 << " Tu " << winsPlayer1 << endl;
+    case EMPAT:
+      cout << "Empat. Seguim la partida" << endl;
+      ;
+      break;
+    case WINB:
+      winsPlayer2++;
 
-	balesPlayer1 = 1;
-	balesPlayer2 = 1;
-	break;
-      case WINA:
-	winsPlayer1++;
+      cout << "Et guanya un ordinador!!!" << endl;
+      cout << "MARCADOR - Ordinador " << winsPlayer2 << " Tu " << winsPlayer1
+           << endl;
 
-	cout << "Guanyes Tu!!!" << endl;
-	cout << "MARCADOR - Ordinador " << winsPlayer2 << " Tu " << winsPlayer1 << endl;
+      balesPlayer1 = 1;
+      balesPlayer2 = 1;
+      break;
+    case WINA:
+      winsPlayer1++;
 
-	balesPlayer1 = 1;
-	balesPlayer2 = 1;
-	break;
+      cout << "Guanyes Tu!!!" << endl;
+      cout << "MARCADOR - Ordinador " << winsPlayer2 << " Tu " << winsPlayer1
+           << endl;
+
+      balesPlayer1 = 1;
+      balesPlayer2 = 1;
+      break;
     }
-
-    }
+  }
 
   if (winsPlayer2 > winsPlayer1) {
     cout << "El guanyador final es l'ordinador";
