@@ -10,3 +10,11 @@ int tauler[N_FILES][N_COLUMNES];
 int posaFitxa(int tauler[N_FILES][N_COLUMNES], int columna, int jugador)
 {
 }
+
+bool quatreRalla(int tauler[N_FILES][N_COLUMNES], int fila, int colummna)
+{
+}
+
+int jugaQuatreRalla(int tauler[N_FILES][N_COLUMNES])
+{
+}
