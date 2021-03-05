@@ -9,147 +9,305 @@ int tauler[N_FILES][N_COLUMNES];
 
 int posaFitxa(int tauler[N_FILES][N_COLUMNES], int columna, int jugador)
 {
-    while (0 <= columna <= N_COLUMNES)
+    int fila = N_FILES - 1;
+    bool posarFitxa = false;
+
+    while (fila >= 0 && !posarFitxa)
     {
-        cout << "Columna fora del tauler..." << endl;
-        cout << "A quina columna vols introduir la fitxa: ";
-        cin >> columna;
+        if (tauler[fila][columna] == 0)
+        {
+            posarFitxa = true;
+
+            if (jugador == 1)
+            {
+                tauler[fila][columna] = 1;
+            }
+            else if (jugador == 2)
+            {
+                tauler[fila][columna] = 2;
+            }
+        }
+        else
+        {
+            fila--;
+        }
     }
 
-    if (tauler[0][columna] != 0)
+    if (posarFitxa)
     {
-        return '-1';
+        return fila;
     }
     else
     {
-        for (int fila = 1; fila < N_FILES; fila++)
-        {
-            if (tauler[fila][columna] == 0)
-            {
-                return fila;
-            }
-        }
+        return -1;
     }
 }
 
 bool quatreRatllaHoritzontal(int tauler[N_FILES][N_COLUMNES], int fila, int columna)
 {
-    int fitxaJugador = tauler[fila][columna];
-    int fitxesIguals = 0;
+    int fitxaJugador = tauler[fila][columna], fitxesIguals = 0, posicio, j = 0;
+    bool quatreRatlla;
 
     for (int i = 0; i < N_COLUMNES; i++)
     {
         if (tauler[fila][i] == fitxaJugador)
         {
-            fitxesIguals++;
-        }
-        else
-        {
-            fitxesIguals = 0;
+            quatreRatlla = true;
+            posicio = i;
+
+            while ((fitxesIguals < 4) && quatreRatlla)
+            {
+                if (tauler[fila][posicio + j] != fitxaJugador)
+                {
+                    quatreRatlla = false;
+                    fitxesIguals = 0;
+                }
+                else
+                {
+                    fitxesIguals++;
+                    j++;
+                }
+            }
         }
     }
 
-    if (fitxesIguals == 4)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return quatreRatlla;
 }
 
 bool quatreRatllaVertical(int tauler[N_FILES][N_COLUMNES], int fila, int columna)
 {
-    int fitxaJugador = tauler[fila][columna];
-    int fitxesIguals = 0;
+    int fitxaJugador = tauler[fila][columna], fitxesIguals = 0, posicio, j = 0;
+    bool quatreRatlla;
 
     for (int i = 0; i < N_FILES; i++)
     {
-        if (tauler[N_FILES][columna] == fitxaJugador)
+        if (tauler[i][columna] == fitxaJugador)
         {
-            fitxesIguals++;
+            quatreRatlla = true;
+            posicio = i;
+
+            while ((fitxesIguals < 4) && quatreRatlla)
+            {
+                if (tauler[posicio + j][columna] != fitxaJugador)
+                {
+                    quatreRatlla = false;
+                    fitxesIguals = 0;
+                }
+                else
+                {
+                    fitxesIguals++;
+                    j++;
+                }
+            }
+        }
+    }
+
+    return quatreRatlla;
+}
+
+bool quatreRatllaDiagonalEsquerra(int tauler[N_FILES][N_COLUMNES], int fila, int columna)
+{
+    int fitxaJugador = tauler[fila][columna], fitxesIguals = 0, posicioX, posicioY, k = 0;
+    bool quatreRatlla;
+
+    while (columna > 0 && fila > 0)
+    {
+        columna--;
+        fila--;
+    }
+
+    for (int i = fila; i < N_FILES; i++)
+    {
+        for (int j = columna; j < N_COLUMNES; j++)
+        {
+            if (tauler[i][j] == fitxaJugador)
+            {
+                quatreRatlla = true;
+                posicioX = i;
+                posicioY = j;
+
+                while ((fitxesIguals < 4) && quatreRatlla)
+                {
+                    if (tauler[posicioX + k][posicioY + k] != fitxaJugador)
+                    {
+                        quatreRatlla = false;
+                        fitxesIguals = 0;
+                    }
+                    else
+                    {
+                        fitxesIguals++;
+                        k++;
+                    }
+                }
+            }
+        }
+    }
+
+    return quatreRatlla;
+}
+
+bool quatreRatllaDiagonalDreta(int tauler[N_FILES][N_COLUMNES], int fila, int columna)
+{
+    int fitxaJugador = tauler[fila][columna], fitxesIguals = 0, posicioX, posicioY, k = 0;
+    bool quatreRatlla;
+
+    while (columna < N_COLUMNES && fila > 0)
+    {
+        columna++;
+        fila--;
+    }
+
+    for (int i = fila; i < N_FILES; i++)
+    {
+        for (int j = columna; j > 0; j--)
+        {
+            if (tauler[i][j] == fitxaJugador)
+            {
+                quatreRatlla = true;
+                posicioX = i;
+                posicioY = j;
+
+                while ((fitxesIguals < 4) && quatreRatlla)
+                {
+                    if (tauler[posicioX + k][posicioY - k] != fitxaJugador)
+                    {
+                        quatreRatlla = false;
+                        fitxesIguals = 0;
+                    }
+                    else
+                    {
+                        fitxesIguals++;
+                        k++;
+                    }
+                }
+            }
+        }
+    }
+
+    return quatreRatlla;
+}
+
+bool quatreRatlla(int tauler[N_FILES][N_COLUMNES], int fila, int columna)
+{
+    bool ratllaHoritzontal, ratllaVertical, ratllaDiagonalEsquerra, ratllaDiagonalDreta;
+
+    ratllaHoritzontal = quatreRatllaHoritzontal(tauler, fila, columna);
+    ratllaVertical = quatreRatllaVertical(tauler, fila, columna);
+    ratllaDiagonalEsquerra = quatreRatllaDiagonalEsquerra(tauler, fila, columna);
+    ratllaDiagonalDreta = quatreRatllaDiagonalDreta(tauler, fila, columna);
+
+    if (ratllaHoritzontal || ratllaVertical || ratllaDiagonalEsquerra || ratllaDiagonalDreta)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool taulerEstaComplet(int tauler[N_FILES][N_COLUMNES])
+{
+    int i = 0;
+    bool found = false;
+
+    while (i < N_COLUMNES && !found)
+    {
+        if (tauler[0][i] == 0)
+        {
+            found = true;
         }
         else
         {
-            fitxesIguals = 0;
+            i++;
         }
     }
 
-    if (fitxesIguals == 4)
-    {
-        return true;
-    }
-    else
+    if (found)
     {
         return false;
     }
+    else
+    {
+        return true;
+    }
 }
 
-bool quatreRatllaDiagonal1(int tauler[N_FILES][N_COLUMNES], int fila, int columna)
+int jugaQuatreRatlla(int tauler[N_FILES][N_COLUMNES])
 {
-    int fitxaJugador = tauler[fila][columna];
-    int fitxesIguals = 0;
+    int columna, fila, player, winner;
+    bool isWinner, fitxaPosada, taulerComplet;
 
-    for (int i = 0; i < N_FILES; i++)
+    do
     {
-        for (int j = 0; j < N_COLUMNES; j++)
+        do
         {
-            if (tauler[i][j] == fitxaJugador)
+            player = 1;
+            cout << "PLAYER " << player << " -> Introdueix a quina columna vols posar la fitxa: ";
+            cin >> columna;
+
+            fila = posaFitxa(tauler, columna, player);
+
+            if (fila == -1)
             {
-                fitxesIguals++;
+                fitxaPosada = false;
+                taulerComplet = taulerEstaComplet(tauler);
             }
             else
             {
-                fitxesIguals = 0;
+                fitxaPosada = true;
             }
-        }
-    }
+        } while (!fitxaPosada && !taulerComplet);
 
-    if (fitxesIguals == 4)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-bool quatreRatllaDiagonal2(int tauler[N_FILES][N_COLUMNES], int fila, int columna)
-{
-    int fitxaJugador = tauler[fila][columna];
-    int fitxesIguals = 0;
-
-    for (int i = N_FILES - 1; i >= 0; i++)
-    {
-        for (int j = N_COLUMNES - 1; i >= 0; i++)
+        if (!taulerComplet)
         {
-            if (tauler[i][j] == fitxaJugador)
+            isWinner = quatreRatlla(tauler, fila, columna);
+
+            if (isWinner)
             {
-                fitxesIguals++;
-            }
-            else
-            {
-                fitxesIguals = 0;
+                winner = player;
             }
         }
-    }
 
-    if (fitxesIguals == 4)
+        if (!isWinner && !taulerComplet)
+        {
+            do
+            {
+                player = 2;
+                cout << "PLAYER " << player << " -> Introdueix a quina columna vols posar la fitxa: ";
+                cin >> columna;
+
+                fila = posaFitxa(tauler, columna, player);
+
+                if (fila == -1)
+                {
+                    fitxaPosada = false;
+                    taulerComplet = taulerEstaComplet(tauler);
+                }
+                else
+                {
+                    fitxaPosada = true;
+                }
+            } while (!fitxaPosada && !taulerComplet);
+
+            if (!taulerComplet)
+            {
+                isWinner = quatreRatlla(tauler, fila, columna);
+
+                if (isWinner)
+                {
+                    winner = player;
+                }
+            }
+        }
+    } while (!isWinner && !taulerComplet);
+
+    if (taulerComplet)
     {
-        return true;
+        return -1;
     }
     else
     {
-        return false;
+        return winner;
     }
-}
-
-bool quatreRatlla(int tauler[N_FILES][N_COLUMNES], int fila, int colummna)
-{
-}
-
-int jugaQuatreRalla(int tauler[N_FILES][N_COLUMNES])
-{
 }
